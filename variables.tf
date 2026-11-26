@@ -131,14 +131,6 @@ EOT
   validation {
     condition = alltrue([
       for k, v in var.stream_analytics_output_blobs : (
-        v.batch_max_wait_time == null || (length(v.batch_max_wait_time) > 0)
-      )
-    ])
-    error_message = "[from validate.BatchMaxWaitTime: invalid when value == \"\"]"
-  }
-  validation {
-    condition = alltrue([
-      for k, v in var.stream_analytics_output_blobs : (
         v.batch_min_rows == null || (v.batch_min_rows >= 0 && v.batch_min_rows <= 1000000)
       )
     ])
@@ -152,6 +144,6 @@ EOT
     ])
     error_message = "must not be empty"
   }
-  # Note: 8 additional provider-side validators are enforced at apply time but not mirrored as validation{} blocks here (bespoke or non-mechanically-translatable).
+  # Note: 7 additional provider-side validators are enforced at apply time but not mirrored as validation{} blocks here (bespoke or non-mechanically-translatable).
 }
 
